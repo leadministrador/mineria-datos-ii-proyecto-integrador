@@ -60,3 +60,16 @@ flowchart LR
 | Quarantine | registros inválidos | Parquet | fecha |
 
 **Promoción:** un dato pasa a la zona siguiente solo si cumple las reglas de calidad.
+
+## 6. Flujo batch con MapReduce
+
+**Objetivo:** costo diario por organización y servicio.
+
+| Etapa | Qué hace |
+|---|---|
+| Map | por cada evento → clave `(org_id, fecha, service)`, valor `cost_usd_increment` |
+| Shuffle | junta todos los eventos con la misma clave |
+| Reduce | suma los costos de cada clave |
+| Salida | `org_daily_usage_by_service` en Gold |
+
+En Spark: `groupBy("org_id", "fecha", "service").agg(sum("cost_usd_increment"))`
