@@ -47,3 +47,16 @@ flowchart LR
 ```
 
 **Patrón elegido: Lambda.** Batch para maestros y facturación (cambian poco). Streaming para eventos (llegan en micro-lotes). Herramienta: PySpark.
+
+
+## 5. Data Lake
+
+| Zona | Qué guarda | Formato | Partición |
+|---|---|---|---|
+| Landing | archivos originales, no se modifican | CSV / JSONL | — |
+| Bronze | igual a la fuente + `ingest_ts` y `source_file` | Parquet | fecha |
+| Silver | datos limpios, sin duplicados, v1/v2 unidos | Parquet | fecha y servicio |
+| Gold | marts para FinOps, Soporte y Producto | Parquet | fecha |
+| Quarantine | registros inválidos | Parquet | fecha |
+
+**Promoción:** un dato pasa a la zona siguiente solo si cumple las reglas de calidad.
