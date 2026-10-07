@@ -73,3 +73,22 @@ flowchart LR
 | Salida | `org_daily_usage_by_service` en Gold |
 
 En Spark: `groupBy("org_id", "fecha", "service").agg(sum("cost_usd_increment"))`
+
+## 7. Matriz requisito-componente
+
+| Requisito | Componente |
+|---|---|
+| Ingesta batch | PySpark → Bronze |
+| Ingesta streaming | Structured Streaming → Bronze |
+| Calidad | reglas + Quarantine |
+| Limpieza y v1/v2 | Silver |
+| Marts por área | Gold |
+| Consultas | Cassandra |
+
+## 8. Riesgos y mitigación
+
+| Riesgo | Mitigación |
+|---|---|
+| `value` como texto | convertir a número |
+| costos negativos | regla de calidad y quarantine |
+| 3 monedas |
