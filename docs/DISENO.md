@@ -32,3 +32,18 @@ Ingestar, limpiar y publicar datos de clientes para **FinOps** (costos), **Sopor
 | nps_surveys | encuesta | 92 | mensual |
 | billing_monthly | factura | 240 | mensual |
 | usage_events | evento | 43.200 | streaming |
+
+## 4. Arquitectura
+
+```mermaid
+flowchart LR
+  A[CSV maestros y facturación] -->|batch| L[Landing]
+  B[Eventos JSONL] -->|streaming| L
+  L --> BR[Bronze]
+  BR --> S[Silver]
+  S --> G[Gold]
+  G --> C[(Cassandra)]
+  C --> U[FinOps / Soporte / Producto]
+```
+
+**Patrón elegido: Lambda.** Batch para maestros y facturación (cambian poco). Streaming para eventos (llegan en micro-lotes). Herramienta: PySpark.
