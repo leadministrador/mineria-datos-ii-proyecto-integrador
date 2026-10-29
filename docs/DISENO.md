@@ -32,19 +32,21 @@ Ingestar, limpiar y publicar datos de clientes para **FinOps** (costos), **Sopor
 | Variedad | CSV y JSONL, 8 fuentes, esquema v1 y v2 |
 | Veracidad | nulos, `value` como texto, 216 costos negativos, 3 monedas |
 | Valor | control de costos, SLA y uso |
+## 3. Inventario de fuentes
 
-## 3. Fuentes
+> [!TIP]
+> Corrección 4 de la devolución: grano, clave, trazabilidad y riesgos por fuente.
 
-| Fuente | 1 fila = | Filas | Frecuencia |
-|---|---|---|---|
-| customers_orgs | organización | 80 | diaria |
-| users | usuario | 800 | diaria |
-| resources | recurso | 400 | diaria |
-| support_tickets | ticket | 1.000 | diaria |
-| marketing_touches | interacción | 1.500 | diaria |
-| nps_surveys | encuesta | 92 | mensual |
-| billing_monthly | factura | 240 | mensual |
-| usage_events | evento | 43.200 | streaming |
+- customers_orgs: 1 fila = organización · clave org_id · 80 filas · 11 nps_score nulos
+- users: 1 fila = usuario · clave user_id · 800 filas · 139 last_login nulos
+- resources: 1 fila = recurso · clave resource_id · 400 filas · 83 tags_json nulos
+- support_tickets: 1 fila = ticket · clave ticket_id · 1.000 filas · 240 resolved_at y 254 csat nulos
+- marketing_touches: 1 fila = interacción · clave touch_id · 1.500 filas · sin nulos
+- nps_surveys: 1 fila = encuesta · clave org_id + survey_date · 92 filas · 19 nps_score nulos
+- billing_monthly: 1 fila = factura · clave invoice_id · 240 filas · 3 monedas y 13 subtotales negativos
+- usage_events: 1 fila = evento · clave event_id · 43.200 filas · value como texto, 2.038 unit nulos y 211 costos < -0,01
+
+Trazabilidad: en Bronze cada fila lleva ingest_ts y source_file (consigna 4.2).
 
 ## 4. Arquitectura
 
