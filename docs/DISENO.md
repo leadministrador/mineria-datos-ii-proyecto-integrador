@@ -8,7 +8,20 @@ Ingestar, limpiar y publicar datos de clientes para **FinOps** (costos), **Sopor
 - Eventos en casi tiempo real.
 - Maestros y facturación en batch.
 
-**Objetivos:** 8 fuentes en Bronze · `event_id` sin duplicados · inválidos a quarantine · 5 consultas desde Cassandra.
+> [!TIP]
+> **Necesidad analítica por usuario** (consigna 2.3)
+> - **FinOps:** costos, consumo, revenue, créditos, impuestos, anomalías y eficiencia por organización y servicio.
+> - **Soporte:** volumen de tickets, severidad, cumplimiento de SLA y CSAT por organización y fecha.
+> - **Producto / Usage:** uso de servicios, requests, métricas operativas, tokens GenAI y carbono cuando estén disponibles.
+
+> [!TIP]
+> **Criterios de éxito de esta etapa** (consigna 5.4)
+> - El problema, los usuarios y los criterios de éxito están formulados sin ambigüedad.
+> - La arquitectura responde a los requisitos y distingue claramente batch y streaming.
+> - Las zonas del Data Lake, formatos y particiones son coherentes con los datos provistos.
+> - El flujo MapReduce o equivalente muestra cómo se resolvería el procesamiento batch del caso.
+> - Los supuestos y riesgos son realistas y tienen mitigaciones propuestas.
+> - El repositorio y la documentación permiten continuar la implementación sin rehacer la fundación.
 
 ## 2. Las 5V
 
