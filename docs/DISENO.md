@@ -86,18 +86,22 @@ Casi tiempo real para métricas de uso, consumo y costos incrementales; batch di
 
 
 
+> [!TIP]
+> Corrección 2: naming, retención, metadatos, promoción y particiones.
+
 ## 5. Data Lake
 
-| Zona | Qué guarda | Formato | Partición |
-|---|---|---|---|
-| Landing | archivos originales, no se modifican | CSV / JSONL | — |
-| Bronze | igual a la fuente + `ingest_ts` y `source_file` | Parquet | fecha |
-| Silver | datos limpios, sin duplicados, v1/v2 unidos | Parquet | fecha y servicio |
-| Gold | marts para FinOps, Soporte y Producto | Parquet | fecha |
-| Quarantine | registros inválidos | Parquet | fecha |
+Zonas: Landing, Bronze, Silver, Gold y Quarantine; Parquet desde Bronze (consigna 4.2).
 
-**Promoción:** un dato pasa a la zona siguiente solo si cumple las reglas de calidad.
+Naming: datalake/zona/fuente.
 
+Particiones: por fecha, porque las consultas usan rangos de fechas (consigna 7.4) y por servicio quedarían archivos chicos (Clase 03).
+
+Retención: todo el histórico; Landing no se borra (consigna 3.2).
+
+Metadatos: ingest_ts y source_file (consigna 4.2).
+
+Promoción: a Silver solo pasan los válidos; el resto va a Quarantine (consigna 6.2).
 ## 6. Flujo batch con MapReduce
 
 **Objetivo:** costo diario por organización y servicio.
