@@ -126,10 +126,29 @@ En Spark: `groupBy("org_id", "fecha", "service").agg(sum("cost_usd_increment"))`
 | Marts por área | Gold |
 | Consultas | Cassandra |
 
-## 8. Riesgos y mitigación
+> [!TIP]
+> Corrección 5: horas, responsables y riesgos.
 
-| Riesgo | Mitigación |
-|---|---|
-| `value` como texto | convertir a número |
-| costos negativos | regla de calidad y quarantine |
-| 3 monedas |
+## 8. Riesgos
+
+value llega como texto → convertir a número (cast).
+
+211 costos menores a -0,01 → Quarantine.
+
+2.038 eventos con unit vacío y value → Quarantine.
+
+3 monedas en facturación → convertir con exchange_rate_to_usd.
+
+Cambio de esquema v1 / v2 → esquema explícito con carbon_kg y genai_tokens.
+
+Falla de AstraDB o de conexión → plan alternativo con capturas y salidas guardadas (consigna 8.4).
+
+## 9. Plan y esfuerzo
+
+Responsable: Leandro Lencina.
+
+Recursos: Google Colab, PySpark, GitHub y Cassandra en DataStax Astra DB.
+
+Horas usadas: primera entrega 6 h · correcciones 3 h.
+
+Horas planificadas: 2 h semanales (consigna): 6 h hasta el 18/11 y 6 h hasta el 09/12.
