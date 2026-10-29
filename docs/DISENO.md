@@ -48,20 +48,42 @@ Ingestar, limpiar y publicar datos de clientes para **FinOps** (costos), **Sopor
 
 Trazabilidad: en Bronze cada fila lleva ingest_ts y source_file (consigna 4.2).
 
+> [!TIP]
+> Corrección 1 de la devolución: responsabilidades, quarantine, capacidades transversales y justificación de Lambda.
+
 ## 4. Arquitectura
 
 ```mermaid
 flowchart LR
   A[CSV maestros y facturación] -->|batch| L[Landing]
-  B[Eventos JSONL] -->|streaming| L
+  B[JSONL eventos] -->|streaming| L
   L --> BR[Bronze]
   BR --> S[Silver]
+  BR -->|inválidos| Q[Quarantine]
   S --> G[Gold]
   G --> C[(Cassandra)]
   C --> U[FinOps / Soporte / Producto]
+  T[Transversal: gobierno, calidad, seguridad, metadatos, observabilidad]
 ```
 
-**Patrón elegido: Lambda.** Batch para maestros y facturación (cambian poco). Streaming para eventos (llegan en micro-lotes). Herramienta: PySpark.
+Responsabilidades:
+
+Landing (consigna 4.2): archivos originales. No modificar.
+
+Bronze (consigna 4.2): mismo grano de la fuente, tipificación explícita, deduplicación cuando corresponda y columnas técnicas ingest_ts y source_file.
+
+Silver (consigna 4.2): normalización, joins, tratamiento de nulos y outliers, compatibilización de versiones de esquema y SCD cuando aplique.
+
+Quarantine (consigna 4.4): separación o bloqueo de registros inválidos y quarantine en Parquet.
+
+Gold (consigna 4.2): tablas o vistas orientadas a FinOps, Soporte y Producto/Usage, preparadas para servir en Cassandra/AstraDB.
+
+Capacidades transversales (consigna 4.1): gobierno, calidad, seguridad, metadatos y observabilidad.
+
+Por qué Lambda (consigna 4.3): batch para maestros, facturación y encuestas; streaming para usage_events_stream con ventanas, watermarks e idempotencia.
+
+Casi tiempo real para métricas de uso, consumo y costos incrementales; batch diario o mensual para maestros, facturación y fuentes de referencia (consigna 2.1). Los eventos llegan fragmentados para simular micro-lotes (consigna 3.1).
+
 
 
 ## 5. Data Lake
