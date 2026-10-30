@@ -14,3 +14,15 @@ Calidad: 211 costos < -0,01 · 2.038 unit vacíos con value · 0 event_id repeti
 Volumen: 720 eventos por día · 120 por día y servicio.
 
 Facturación: USD 160 · ARS 51 · EUR 29 · 13 subtotales negativos.
+
+## Segunda entrega (notebook 02)
+
+Bronze eventos: 43.200 · al repetir la carga: 43.200 (sin duplicados).
+
+Silver: 40.956 · Quarantine: 2.244 · total 43.200.
+
+Maestros en Bronze: customers_orgs 80 · users 800 · billing_monthly 240.
+
+Silver billing: 240.
+
+Gold org_daily_usage_by_service: 11.050 filas.
