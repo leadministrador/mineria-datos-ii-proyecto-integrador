@@ -16,6 +16,8 @@ DECISIONS.md → decisiones
 
 notebooks/01_exploracion_landing.ipynb → exploración de los datos
 
+notebooks/02_streaming_bronze.ipynb → streaming, Bronze, Silver, Quarantine y Gold
+
 config/ → configuración de ejemplo, sin credenciales
 
 evidence/ → evidencias
