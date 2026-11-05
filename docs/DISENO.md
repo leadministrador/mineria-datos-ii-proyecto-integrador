@@ -53,19 +53,19 @@ Trazabilidad: en Bronze cada fila lleva ingest_ts y source_file (consigna 4.2).
 
 ## 4. Arquitectura
 
+flowchart LR
 ```mermaid
 flowchart LR
-  A[CSV maestros y facturación] -->|batch| L[Landing]
-  B[JSONL eventos] -->|streaming| L
-  L --> BR[Bronze]
-  BR --> S[Silver]
-  BR -->|inválidos| Q[Quarantine]
-  S --> G[Gold]
-  G --> C[(Cassandra)]
-  C --> U[FinOps / Soporte / Producto]
-  T[Transversal: gobierno, calidad, seguridad, metadatos, observabilidad]
+  A[CSV maestros: 80 · 800 · 240] -->|batch| L[Landing: archivos originales]
+  B[JSONL eventos: 120 archivos] -->|streaming| L
+  L -->|overwrite / availableNow| BR[Bronze Parquet 43.200]
+  BR -->|RULE| S[Silver 40.956]
+  BR -->|NOT RULE + motivo| Q[Quarantine 2.244]
+  S -->|batch groupBy| G[Gold org_daily_usage_by_service 11.050]
+  G -.->|pendiente| C[(Cassandra Astra DB)]
+  C -.-> U[FinOps / Soporte / Producto]
+  T[Transversal: checkpoints, ingest_ts, source_file, Quarantine con motivo]
 ```
-
 Responsabilidades:
 
 Landing (consigna 4.2): archivos originales. No modificar.
