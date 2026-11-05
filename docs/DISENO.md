@@ -53,7 +53,6 @@ Trazabilidad: en Bronze cada fila lleva ingest_ts y source_file (consigna 4.2).
 
 ## 4. Arquitectura
 
-flowchart LR
 ```mermaid
 flowchart LR
   A[CSV maestros: 80 · 800 · 240] -->|batch| L[Landing: archivos originales]
