@@ -12,6 +12,8 @@ docs/CORRECCIONES.md → correcciones de la primera entrega
 
 docs/MATRIZ.md → matriz requisito-componente
 
+docs/BACKLOG.md → backlog final priorizado
+
 DECISIONS.md → decisiones
 
 notebooks/01_exploracion_landing.ipynb → exploración de los datos
