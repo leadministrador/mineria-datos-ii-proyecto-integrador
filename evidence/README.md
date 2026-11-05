@@ -21,6 +21,8 @@ Bronze eventos: 43.200 · al repetir la carga: 43.200 (sin duplicados).
 
 Silver: 40.956 · Quarantine: 2.244 · total 43.200.
 
+Quarantine por motivo: costo_negativo 211 · unit_vacio 2.033 (consulta quarantine_usage_events).
+
 Maestros en Bronze: customers_orgs 80 · users 800 · billing_monthly 240.
 
 Silver billing: 240.
