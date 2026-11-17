@@ -5,17 +5,15 @@
 
 ## Obligatorio
 
-1. Astra DB: tabla y consultas.
+1. Las 3 consultas restantes desde Cassandra (la 1 y la 2 ya están).
 
-2. Las 5 consultas desde Cassandra.
+2. Gold de revenue, anomalías, tickets y tokens.
 
-3. Gold de revenue, anomalías, tickets y tokens.
+3. Analítica o ML.
 
-4. Analítica o ML.
+4. Gobierno del dato.
 
-5. Gobierno del dato.
-
-6. Presentación.
+5. Presentación.
 
 ## Deseable
 
