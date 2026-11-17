@@ -63,7 +63,8 @@ flowchart LR
   S -->|batch groupBy| G[Gold org_daily_usage_by_service 11.050]
   G -->|batch: 11.050 + 262 filas| C[(Cassandra Astra DB: 2 tablas)]
   C -->|2 consultas CQL| U[FinOps / Soporte / Producto]
-  C -.-> U[FinOps / Soporte / Producto]
+
+
   T[Transversal: checkpoints, ingest_ts, source_file, Quarantine con motivo]
 ```
 Responsabilidades:
