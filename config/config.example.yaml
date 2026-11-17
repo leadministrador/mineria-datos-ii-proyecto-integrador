@@ -1,0 +1,12 @@
+# Ejemplo de configuración (consigna 8.2). Sin credenciales.
+landing: /content/proyecto/datalake/landing
+spark_shuffle_partitions: 8
+
+# Astra DB (Cassandra)
+astra_database: mineria_datos_ii
+astra_region: us-east-2
+astra_keyspace: proyecto_integrador
+astra_scb: /content/secure-connect-mineria-datos-ii.zip
+
+# El token de Astra no se guarda acá: va en los secretos de Colab como ASTRA_TOKEN.
+# El Secure Connect Bundle (.zip) tampoco se sube al repo.
