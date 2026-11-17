@@ -36,8 +36,7 @@ evidence/ → evidencias
 
 5. Astra DB: generar un token (Database Administrator) y guardarlo en Colab → Secretos (llave) con el nombre ASTRA_TOKEN y acceso al notebook activado.
 
-6. Astra DB: crear las 2 tablas en la CQL console con el CREATE TABLE de DECISIONS.md (D13).
-
+6. Astra DB: crear las 2 tablas en la CQL console con config/astra_tablas.cql.
 7. Entorno de ejecución → Ejecutar todas.
 
 8. Resultados esperados:
